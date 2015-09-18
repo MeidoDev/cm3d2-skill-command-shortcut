@@ -1,63 +1,3 @@
-/*
-  夜伽コマンド用ショートカットを付加するUnityInjector用プラグイン
-
-    ・「1」～「9」キー等で夜伽コマンドの実行ができるようになります
-    ・「Enter」キーでメッセージウィンドウの進行ができるようになります
-    ・「Enter」キーでダイアログやメニュー画面の「OK」「Next」ボタンを押すことができるようになります
-    ・「1」～「9」キーで選択肢やメイドの選択ができるようになります
-
-
-▼ 前提
-
-  ・Microsoft .NET Framework 3.5 がインストール済み
-  ・UnityInjector が動作している
-  ・C:\KISS\CM3D2_KAIZOU\ 下にゲーム一式がある
-
-
-▼ コンパイル
-
-(1) 今見ているこのファイルを、「CM3D2.SkillCommandShortCut.Plugin.cs」という名前で保存してください
-
-(2) 「CM3D2.SkillCommandShortCut.Plugin.cs」を
-    「C:\KISS\CM3D2_KAIZOU\UnityInjector\」フォルダーへコピーして、
-    「C:\KISS\CM3D2_KAIZOU\UnityInjector\CM3D2.SkillCommandShortCut.Plugin.cs」というファイルが
-    存在するようにしてください
-
-(3) 保存した後、以下のコマンドを実行します
-
-―――＜＜コマンドプロンプトでここから＞＞―――
-
-cd /d C:\KISS\CM3D2_KAIZOU\UnityInjector
-C:\Windows\Microsoft.NET\Framework\v3.5\csc /t:library /lib:..\CM3D2x64_Data\Managed /r:UnityInjector.dll /r:UnityEngine.dll /r:Assembly-CSharp.dll CM3D2.SkillCommandShortCut.Plugin.cs
-
-―――＜＜ここまで実行＞＞―――
-
-コンパイルに成功すると、同じフォルダーに「CM3D2.SkillCommandShortCut.Plugin.dll」というファイルが生成されます。
-
-
-▼ 動作確認
-
-  コンパイル後 C:\KISS\CM3D2_KAIZOU\CM3D2x64.exe を起動して、
-  夜伽画面へ行き、コマンド選択肢の左に数字がついていることを確認してください。
-  対応するキーを押すことで、コマンドが実行されます
-
-
-▼ 履歴
-
-    0.1.2   画面下部のメッセージウィンドウのテキストを「Enter」キーで行う機能を追加
-            モーダルダイアログの「OK」ボタンを「Enter」キーで押す機能を追加
-            昼/夜メニューの「Next」、昼/夜メニューの結果報告の「OK」、毎日収支報告の「OK」を「Enter」キーで押す機能を追加
-            夜伽ステージ選択の「OK」、スキル選択の「Next」、スキル実行時の「Next」、完了画面の「Next」を「Enter」キーで押す機能を追加
-            コミュニケーション、会話の選択肢を「1」キー等で押す機能を追加
-            メイド選択画面のメイドアイコンを「1」キー等で押す機能を追加
-            モーダルダイアログ、夜伽メイド選択の「Cancel」を「BackSpace」キーで押す機能を追加
-
-    0.1.1   ショートカットが有効な場合のみ、キーのアイコンが表示されるように修正 (その１>>891)
-            スキル変更ボタンを押した直後にコマンドを実行し続けると、ゲームが進行不能になるバグを修正 (その１>>978)
-
-    0.1.0   最初の版
-
-*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +12,7 @@ namespace CM3D2.SkillCommandShortCut.Plugin
     PluginFilter("CM3D2x86"),
     PluginFilter("CM3D2VRx64"),
     PluginName("CM3D2 Skill Command Shortcut"),
-    PluginVersion("0.1.2.0")]
+    PluginVersion("0.1.3.0")]
     public class SkillCommandShortCut : PluginBase
     {
         GameObject uiObject;
@@ -165,8 +105,8 @@ namespace CM3D2.SkillCommandShortCut.Plugin
                 return;
             }
 
-            //	昼コミュニケーション選択
-            //	夜伽メイド会話選択
+            //  昼コミュニケーション選択
+            //  夜伽メイド会話選択
             if (Application.loadedLevel == 15)
             {
                 GameObject go = GameObject.Find("__GameMain__/SystemUI Root/MessageWindowPanel/SelectorViewer/Contents/SelectButtonParent");
@@ -178,8 +118,8 @@ namespace CM3D2.SkillCommandShortCut.Plugin
                 }
             }
 
-            //	昼コミュニケーションメイド選択
-            //	夜伽メイド選択画面
+            //  昼コミュニケーションメイド選択
+            //  夜伽メイド選択画面
             if (Application.loadedLevel == 1)
             {
                 GameObject go = GameObject.Find("UI Root/Parent/CharacterSelectPanel/Contents/MaidSkillUnitParent");
@@ -191,7 +131,7 @@ namespace CM3D2.SkillCommandShortCut.Plugin
                 }
             }
 
-            //	夜伽ステージ選択
+            //  夜伽ステージ選択
             if (Application.loadedLevel == 14)
             {
                 GameObject go = GameObject.Find("UI Root/StageSelectPanel/StageSelectViewer/StageViewer/Contents/StageUnitParent");
@@ -425,7 +365,8 @@ namespace CM3D2.SkillCommandShortCut.Plugin
                 }
 
                 // 夜伽スキル実行中の「Next」ボタン
-                if (ClickGameObject("/UI Root/YotogiPlayPanel/CommonPanel/UnderButtonGroup/Next"))
+//              if (ClickGameObject("/UI Root/YotogiPlayPanel/CommonPanel/UnderButtonGroup/Next"))
+                if (ClickGameObject("/UI Root/YotogiPlayPanel/UndressingViewer/CommonPanel/UnderButtonGroup/Next"))
                 {
                     return true;
                 }
@@ -469,10 +410,8 @@ namespace CM3D2.SkillCommandShortCut.Plugin
                 UIButton uiButton = go.GetComponent<UIButton>();
                 if (uiButton != null)
                 {
-                    Console.WriteLine("{0} . isEnabled = {1}", name, uiButton.isEnabled);
                     if (uiButton.isEnabled)
                     {
-                        Console.WriteLine("{0} . OnClick", name);
                         uiButton.SendMessage("OnClick");
                         return true;
                     }
@@ -480,7 +419,9 @@ namespace CM3D2.SkillCommandShortCut.Plugin
             }
             else
             {
+#if DEBUG
                 Console.WriteLine("{0} is not found", name);
+#endif
             }
             return false;
         }

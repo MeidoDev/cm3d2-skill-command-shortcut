@@ -1,11 +1,11 @@
 SkillCommandShortcut
 ======================
 
-**Version:** 0.1.2
+**Version:** 0.1.3
 
-**Source:** http://pastebin.com/gaGXawmb ([release post](http://jbbs.shitaraba.net/bbs/read.cgi/game/55179/1439701267/245))
+**Source:** [Github](https://github.com/neguse11/cm3d2_plugins_okiba/tree/master/SkillCommandShortCut)
 
-**Author:** BBSID O7QGDT5c0
+**Author:** [neguse11](https://github.com/neguse11/)
 
 This plugin adds keyboard shortcuts to VN multiple choice selections, popup windows and to yotogi mode.
 
